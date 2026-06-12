@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "page-content": {
+      "type": "editorial-split",
+      "settings": {}
+    }
+  },
+  "order": ["page-content"]
+}

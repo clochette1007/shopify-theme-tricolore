@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "cart-main": {
+      "type": "newsletter",
+      "settings": {
+        "title": "Votre panier"
+      }
+    }
+  },
+  "order": ["cart-main"]
+}

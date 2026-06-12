@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "product-page": {
+      "type": "custom-product-cdm",
+      "settings": {}
+    }
+  },
+  "order": ["product-page"]
+}

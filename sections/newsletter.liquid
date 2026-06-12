@@ -1,0 +1,34 @@
+<section style="background:var(--color-accent);padding:80px 24px;text-align:center;">
+  <div class="container" style="max-width:600px;">
+    <h2 style="color:#fff;margin-bottom:12px;">{{ section.settings.title | default: 'Rejoignez la communauté 🇫🇷' }}</h2>
+    <p style="color:rgba(255,255,255,0.85);font-size:16px;margin-bottom:32px;">{{ section.settings.subtitle | default: 'Offres exclusives, nouveautés et coups de cœur — directement dans votre boîte mail.' }}</p>
+
+    {%- form 'customer', id: 'newsletter-form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div style="display:flex;gap:0;max-width:480px;margin:0 auto 16px;">
+        <input
+          type="email"
+          name="contact[email]"
+          placeholder="Votre adresse email"
+          required
+          style="flex:1;border-radius:4px 0 0 4px;border:none;font-size:15px;padding:14px 18px;"
+        >
+        <button type="submit" class="btn btn--primary" style="border-radius:0 4px 4px 0;white-space:nowrap;">{{ section.settings.cta | default: "S'inscrire" }}</button>
+      </div>
+    {%- endform -%}
+
+    <p style="font-size:11px;color:rgba(255,255,255,0.65);">En vous inscrivant, vous acceptez notre <a href="/pages/confidentialite" style="color:rgba(255,255,255,0.85);text-decoration:underline;">politique de confidentialité</a>. Désinscription possible à tout moment.</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    {"type": "text",     "id": "title",    "label": "Titre",      "default": "Rejoignez la communauté 🇫🇷"},
+    {"type": "textarea","id": "subtitle", "label": "Sous-titre", "default": "Offres exclusives, nouveautés et coups de cœur."},
+    {"type": "text",     "id": "cta",      "label": "Bouton",     "default": "S'inscrire"}
+  ],
+  "presets": [{"name": "Newsletter"}]
+}
+{% endschema %}

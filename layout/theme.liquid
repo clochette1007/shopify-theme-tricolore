@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ page_description | escape }}">
+  <title>{{ page_title }} - {{ shop.name }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {{ content_for_header }}
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+<body x-data="{ menuOpen: false, cartOpen: false }">
+
+  {%- section 'header' -%}
+
+  <main id="MainContent" role="main">
+    {{ content_for_layout }}
+  </main>
+
+  {%- section 'footer' -%}
+
+  <!-- MINI CART DRAWER -->
+  <div x-show="cartOpen" x-transition class="cart-drawer" @click.away="cartOpen = false">
+    <div class="cart-drawer__inner">
+      <button @click="cartOpen = false" class="cart-drawer__close">✕</button>
+      <h3>Mon panier</h3>
+      <div id="cart-drawer-content">{{ cart | json }}</div>
+      <a href="/cart" class="btn btn--primary" style="display:block;text-align:center;margin-top:20px">Voir mon panier</a>
+    </div>
+  </div>
+
+</body>
+</html>

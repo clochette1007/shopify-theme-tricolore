@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "collection-banner": {
+      "type": "hero-banner",
+      "settings": {
+        "heading": "{{ collection.title }}",
+        "subheading": "{{ collection.description }}"
+      }
+    },
+    "collection-products": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Tous les produits",
+        "products_count": 8
+      }
+    }
+  },
+  "order": ["collection-banner", "collection-products"]
+}

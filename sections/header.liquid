@@ -1,0 +1,68 @@
+<!-- BARRE D'ANNONCE -->
+<div class="announcement-bar" style="background:var(--color-primary);color:#fff;text-align:center;padding:10px 16px;font-size:13px;font-weight:600;letter-spacing:0.05em;">
+  🇫🇷 Livraison offerte en France dès 40€ &nbsp;·&nbsp; Retour gratuit 30 jours &nbsp;·&nbsp; Paiement 100% sécurisé 🔒
+</div>
+
+<!-- HEADER -->
+<header class="site-header" x-data="{ menuOpen: false }" style="background:#fff;border-bottom:3px solid var(--color-primary);position:sticky;top:0;z-index:100;">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;height:70px;">
+
+    <!-- LOGO -->
+    <a href="/" class="header__logo" style="font-family:var(--font-heading);font-size:22px;font-weight:900;color:var(--color-primary);letter-spacing:0.15em;text-transform:uppercase;">
+      {%- if settings.logo != blank -%}
+        <img src="{{ settings.logo | image_url: width: 180 }}" alt="{{ shop.name }}" style="height:44px;width:auto;">
+      {%- else -%}
+        {{ shop.name | upcase }}
+      {%- endif -%}
+    </a>
+
+    <!-- NAV DESKTOP -->
+    <nav class="header__nav" style="display:flex;gap:32px;" aria-label="Navigation principale">
+      <a href="/" style="font-weight:700;font-size:14px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-primary);transition:color 0.2s;" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='#002395'">Accueil</a>
+      <a href="/collections/all" style="font-weight:700;font-size:14px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-primary);transition:color 0.2s;" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='#002395'">Boutique</a>
+      <a href="/collections" style="font-weight:700;font-size:14px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-primary);transition:color 0.2s;" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='#002395'">Collections</a>
+      <a href="/pages/a-propos" style="font-weight:700;font-size:14px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-primary);transition:color 0.2s;" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='#002395'">À propos</a>
+      <a href="/pages/contact" style="font-weight:700;font-size:14px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-primary);transition:color 0.2s;" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='#002395'">Contact</a>
+    </nav>
+
+    <!-- ICÔNES -->
+    <div style="display:flex;align-items:center;gap:18px;">
+      <a href="/search" aria-label="Rechercher" style="color:var(--color-primary);font-size:20px;" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='#002395'">🔍</a>
+      <a href="/account" aria-label="Mon compte" style="color:var(--color-primary);font-size:20px;" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='#002395'">👤</a>
+      <a href="/cart" aria-label="Mon panier" style="color:var(--color-primary);font-size:20px;position:relative;" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='#002395'">
+        🛒
+        {%- if cart.item_count > 0 -%}
+          <span style="position:absolute;top:-6px;right:-6px;background:var(--color-accent);color:#fff;font-size:10px;font-weight:800;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
+      <!-- BURGER MOBILE -->
+      <button @click="menuOpen = !menuOpen" style="display:none;background:none;border:none;font-size:24px;cursor:pointer;color:var(--color-primary);" class="header__burger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+
+  <!-- MENU MOBILE -->
+  <div x-show="menuOpen" x-transition style="background:#fff;border-top:1px solid var(--color-border);padding:20px 24px;">
+    <nav style="display:flex;flex-direction:column;gap:16px;">
+      <a href="/" style="font-weight:700;text-transform:uppercase;color:var(--color-primary);">Accueil</a>
+      <a href="/collections/all" style="font-weight:700;text-transform:uppercase;color:var(--color-primary);">Boutique</a>
+      <a href="/collections" style="font-weight:700;text-transform:uppercase;color:var(--color-primary);">Collections</a>
+      <a href="/pages/a-propos" style="font-weight:700;text-transform:uppercase;color:var(--color-primary);">À propos</a>
+      <a href="/pages/contact" style="font-weight:700;text-transform:uppercase;color:var(--color-primary);">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+@media (max-width: 768px) {
+  .header__nav { display: none !important; }
+  .header__burger { display: block !important; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "En-tête",
+  "settings": [],
+  "presets": [{"name": "En-tête par défaut"}]
+}
+{% endschema %}

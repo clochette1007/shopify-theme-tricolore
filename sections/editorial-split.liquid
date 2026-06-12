@@ -1,0 +1,72 @@
+<section class="section" style="background:{% if section.settings.bg_dark %}var(--color-primary){% else %}#fff{% endif %};">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;{% if section.settings.image_position == 'right' %}direction:ltr;{% endif %}">
+
+      {%- if section.settings.image_position == 'right' -%}
+        <!-- TEXTE -->
+        <div>
+          {%- if section.settings.eyebrow != blank -%}
+            <p style="font-size:12px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-accent);margin-bottom:14px;">{{ section.settings.eyebrow }}</p>
+          {%- endif -%}
+          <h2 style="color:{% if section.settings.bg_dark %}#fff{% else %}var(--color-primary){% endif %};margin-bottom:18px;">{{ section.settings.heading | default: 'Made in France' }}</h2>
+          <p style="font-size:16px;color:{% if section.settings.bg_dark %}rgba(255,255,255,0.8){% else %}var(--color-muted){% endif %};line-height:1.7;margin-bottom:28px;">{{ section.settings.text | default: 'Chaque produit est conçu et fabriqué en France, avec des matériaux sélectionnés pour leur qualité et leur durabilité.' }}</p>
+          {%- if section.settings.cta_label != blank -%}
+            <a href="{{ section.settings.cta_url | default: '/' }}" class="btn btn--{% if section.settings.bg_dark %}accent{% else %}primary{% endif %}">{{ section.settings.cta_label }}</a>
+          {%- endif -%}
+        </div>
+        <!-- IMAGE -->
+        <div>
+          {%- if section.settings.image != blank -%}
+            <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.heading }}" style="border-radius:8px;width:100%;">
+          {%- else -%}
+            <div style="aspect-ratio:1;background:#f0f3ff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:80px;">🇫🇷</div>
+          {%- endif -%}
+        </div>
+      {%- else -%}
+        <!-- IMAGE -->
+        <div>
+          {%- if section.settings.image != blank -%}
+            <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.heading }}" style="border-radius:8px;width:100%;">
+          {%- else -%}
+            <div style="aspect-ratio:1;background:#f0f3ff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:80px;">🇫🇷</div>
+          {%- endif -%}
+        </div>
+        <!-- TEXTE -->
+        <div>
+          {%- if section.settings.eyebrow != blank -%}
+            <p style="font-size:12px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-accent);margin-bottom:14px;">{{ section.settings.eyebrow }}</p>
+          {%- endif -%}
+          <h2 style="color:{% if section.settings.bg_dark %}#fff{% else %}var(--color-primary){% endif %};margin-bottom:18px;">{{ section.settings.heading | default: 'Made in France' }}</h2>
+          <p style="font-size:16px;color:{% if section.settings.bg_dark %}rgba(255,255,255,0.8){% else %}var(--color-muted){% endif %};line-height:1.7;margin-bottom:28px;">{{ section.settings.text | default: 'Chaque produit est conçu et fabriqué en France, avec des matériaux sélectionnés pour leur qualité et leur durabilité.' }}</p>
+          {%- if section.settings.cta_label != blank -%}
+            <a href="{{ section.settings.cta_url | default: '/' }}" class="btn btn--{% if section.settings.bg_dark %}accent{% else %}primary{% endif %}">{{ section.settings.cta_label }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+
+<style>
+@media (max-width: 768px) {
+  .editorial-split-grid { grid-template-columns: 1fr !important; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Éditorial 50/50",
+  "settings": [
+    {"type": "text",         "id": "eyebrow",        "label": "Texte eyebrow",     "default": "Notre histoire"},
+    {"type": "textarea",     "id": "heading",        "label": "Titre",             "default": "Made in France, fait avec passion."},
+    {"type": "textarea",     "id": "text",           "label": "Texte",             "default": "Chaque produit est conçu et fabriqué en France, avec des matériaux sélectionnés pour leur qualité."},
+    {"type": "text",         "id": "cta_label",      "label": "Texte bouton",      "default": "En savoir plus"},
+    {"type": "url",          "id": "cta_url",        "label": "Lien bouton"},
+    {"type": "image_picker", "id": "image",          "label": "Image"},
+    {"type": "select",       "id": "image_position", "label": "Position de l'image", "options": [{"value":"left","label":"Gauche"},{"value":"right","label":"Droite"}], "default": "left"},
+    {"type": "checkbox",     "id": "bg_dark",        "label": "Fond bleu",          "default": false}
+  ],
+  "presets": [{"name": "Éditorial 50/50"}]
+}
+{% endschema %}

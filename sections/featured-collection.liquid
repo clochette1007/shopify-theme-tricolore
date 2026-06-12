@@ -1,0 +1,72 @@
+{%- assign collection = collections[section.settings.collection] -%}
+
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <h2 class="section-title">{{ section.settings.title | default: 'Nos Produits' }}</h2>
+    {%- if section.settings.subtitle != blank -%}
+      <p style="text-align:center;color:var(--color-muted);margin-bottom:40px;">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+
+    <div class="grid-4">
+      {%- if collection != blank -%}
+        {%- for product in collection.products limit: section.settings.products_count -%}
+          <div class="product-card">
+            <div class="product-card__image">
+              <a href="{{ product.url }}">
+                {%- if product.featured_image -%}
+                  <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy">
+                {%- else -%}
+                  <div style="width:100%;height:100%;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:40px;">📦</div>
+                {%- endif -%}
+              </a>
+            </div>
+            {%- if product.tags contains 'nouveau' or forloop.index <= 2 -%}
+              <span class="product-card__badge">Nouveau</span>
+            {%- endif -%}
+            <div class="product-card__body">
+              <p class="product-card__title"><a href="{{ product.url }}">{{ product.title }}</a></p>
+              <p class="product-card__price">{{ product.price | money }}</p>
+              <form action="/cart/add" method="post">
+                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                <button type="submit" class="btn btn--primary product-card__btn">Ajouter au panier</button>
+              </form>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..4) -%}
+          <div class="product-card">
+            <div class="product-card__image"><div style="width:100%;aspect-ratio:1;background:#f0f3ff;display:flex;align-items:center;justify-content:center;font-size:48px;">🇫🇷</div></div>
+            <span class="product-card__badge">Nouveau</span>
+            <div class="product-card__body">
+              <p class="product-card__title">Produit Tricolore {{ i }}</p>
+              <p class="product-card__price">29,99 €</p>
+              <button class="btn btn--primary product-card__btn">Ajouter au panier</button>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.cta_label != blank -%}
+      <div style="text-align:center;margin-top:48px;">
+        <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="btn btn--primary">{{ section.settings.cta_label }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection mise en avant",
+  "settings": [
+    {"type": "text",       "id": "title",          "label": "Titre",                "default": "Nos Produits"},
+    {"type": "text",       "id": "subtitle",       "label": "Sous-titre",            "default": "Sélection made in France"},
+    {"type": "collection", "id": "collection",     "label": "Collection à afficher"},
+    {"type": "range",      "id": "products_count", "label": "Nombre de produits",    "min": 2, "max": 8, "step": 1, "default": 4},
+    {"type": "text",       "id": "cta_label",      "label": "Bouton voir tout",      "default": "Voir toute la boutique"},
+    {"type": "url",        "id": "cta_url",        "label": "Lien bouton"}
+  ],
+  "presets": [{"name": "Collection mise en avant"}]
+}
+{% endschema %}

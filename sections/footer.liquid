@@ -1,0 +1,93 @@
+<footer style="background:var(--color-primary);color:#fff;padding:64px 0 0;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;">
+
+      <!-- COL 1 : LOGO + DESC -->
+      <div>
+        <p style="font-family:var(--font-heading);font-size:20px;font-weight:900;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:14px;">{{ shop.name }}</p>
+        <p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:20px;">{{ section.settings.description | default: 'Des produits fabriqués en France, pour ceux qui aiment leur pays.' }}</p>
+        <div style="display:flex;gap:12px;">
+          {%- if section.settings.instagram != blank -%}
+            <a href="{{ section.settings.instagram }}" style="color:rgba(255,255,255,0.7);font-size:22px;" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">📷</a>
+          {%- endif -%}
+          {%- if section.settings.facebook != blank -%}
+            <a href="{{ section.settings.facebook }}" style="color:rgba(255,255,255,0.7);font-size:22px;" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">👍</a>
+          {%- endif -%}
+          {%- if section.settings.tiktok != blank -%}
+            <a href="{{ section.settings.tiktok }}" style="color:rgba(255,255,255,0.7);font-size:22px;" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">🎵</a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- COL 2 : BOUTIQUE -->
+      <div>
+        <h4 style="font-size:13px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:18px;color:#fff;">Boutique</h4>
+        <ul style="display:flex;flex-direction:column;gap:10px;">
+          <li><a href="/collections/all"    style="font-size:14px;color:rgba(255,255,255,0.7);" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Tous les produits</a></li>
+          <li><a href="/collections/nouveautes" style="font-size:14px;color:rgba(255,255,255,0.7);" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Nouveautés</a></li>
+          <li><a href="/collections/meilleures-ventes" style="font-size:14px;color:rgba(255,255,255,0.7);" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Meilleures ventes</a></li>
+          <li><a href="/collections/soldes" style="font-size:14px;color:rgba(255,255,255,0.7);" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Soldes</a></li>
+        </ul>
+      </div>
+
+      <!-- COL 3 : AIDE -->
+      <div>
+        <h4 style="font-size:13px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:18px;color:#fff;">Aide</h4>
+        <ul style="display:flex;flex-direction:column;gap:10px;">
+          <li><a href="/pages/faq"              style="font-size:14px;color:rgba(255,255,255,0.7);" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">FAQ</a></li>
+          <li><a href="/pages/livraison"         style="font-size:14px;color:rgba(255,255,255,0.7);" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Livraison & retours</a></li>
+          <li><a href="/pages/contact"           style="font-size:14px;color:rgba(255,255,255,0.7);" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Contact</a></li>
+          <li><a href="/pages/mentions-legales"  style="font-size:14px;color:rgba(255,255,255,0.7);" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Mentions légales</a></li>
+          <li><a href="/pages/confidentialite"   style="font-size:14px;color:rgba(255,255,255,0.7);" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Confidentialité</a></li>
+        </ul>
+      </div>
+
+      <!-- COL 4 : CONTACT -->
+      <div>
+        <h4 style="font-size:13px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:18px;color:#fff;">Contact</h4>
+        <ul style="display:flex;flex-direction:column;gap:10px;">
+          {%- if section.settings.email != blank -%}
+            <li><a href="mailto:{{ section.settings.email }}" style="font-size:14px;color:rgba(255,255,255,0.7);">📧 {{ section.settings.email }}</a></li>
+          {%- endif -%}
+          <li style="font-size:14px;color:rgba(255,255,255,0.7);">⏰ Lun-Ven, 9h–18h</li>
+          <li style="font-size:14px;color:rgba(255,255,255,0.7);">📍 France 🇫🇷</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM BAR -->
+  <div style="border-top:1px solid rgba(255,255,255,0.15);padding:20px 24px;">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <p style="font-size:13px;color:rgba(255,255,255,0.6);">© 2026 {{ shop.name }}. Fait avec ❤️ en France</p>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span style="font-size:22px;">💳</span>
+        <span style="font-size:22px;">🏧</span>
+        <span style="font-size:13px;color:rgba(255,255,255,0.5);">Visa · Mastercard · PayPal · Apple Pay</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+@media (max-width: 768px) {
+  footer .container > div { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width: 480px) {
+  footer .container > div { grid-template-columns: 1fr !important; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Pied de page",
+  "settings": [
+    {"type": "textarea","id": "description","label": "Description boutique","default": "Des produits fabriqués en France, pour ceux qui aiment leur pays."},
+    {"type": "text",    "id": "email",      "label": "Email contact",       "default": "contact@maison.fr"},
+    {"type": "url",     "id": "instagram",  "label": "Instagram"},
+    {"type": "url",     "id": "facebook",   "label": "Facebook"},
+    {"type": "url",     "id": "tiktok",     "label": "TikTok"}
+  ],
+  "presets": [{"name": "Pied de page"}]
+}
+{% endschema %}

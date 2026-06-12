@@ -1,0 +1,72 @@
+{
+  "general": {
+    "search": "Rechercher",
+    "close": "Fermer",
+    "loading": "Chargement..."
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Ajouter au panier",
+      "buy_now": "Acheter maintenant",
+      "sold_out": "Rupture de stock",
+      "unavailable": "Indisponible",
+      "in_stock": "En stock",
+      "quantity": "Quantité",
+      "size": "Taille",
+      "color": "Couleur",
+      "description": "Description",
+      "reviews": "Avis clients",
+      "related_products": "Vous aimerez aussi",
+      "more_details": "En savoir plus",
+      "shipping_info": "Livraison offerte en France",
+      "return_info": "Retour gratuit sous 30 jours"
+    }
+  },
+  "cart": {
+    "title": "Mon panier",
+    "empty": "Votre panier est vide",
+    "continue_shopping": "Continuer les achats",
+    "checkout": "Passer la commande",
+    "subtotal": "Sous-total",
+    "shipping_notice": "Livraison calculée à la commande",
+    "remove": "Supprimer",
+    "item_count": "{{ count }} article(s)"
+  },
+  "customer": {
+    "login": "Se connecter",
+    "register": "Créer un compte",
+    "logout": "Se déconnecter",
+    "account": "Mon compte",
+    "orders": "Mes commandes",
+    "addresses": "Mes adresses",
+    "email": "Adresse email",
+    "password": "Mot de passe",
+    "forgot_password": "Mot de passe oublié ?",
+    "submit": "Valider"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "shop": "Boutique",
+    "collections": "Collections",
+    "about": "À propos",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "shipping": "Livraison & Retours"
+  },
+  "newsletter": {
+    "subscribe": "S'inscrire",
+    "email_placeholder": "Votre adresse email",
+    "success": "Merci pour votre inscription !",
+    "error": "Une erreur s'est produite, veuillez réessayer."
+  },
+  "footer": {
+    "payment_methods": "Paiement sécurisé",
+    "made_in_france": "Fait avec ❤️ en France",
+    "copyright": "© 2026 Tricolore. Tous droits réservés."
+  },
+  "accessibility": {
+    "skip_to_content": "Aller au contenu principal",
+    "loading": "Chargement en cours",
+    "close_modal": "Fermer la fenêtre"
+  }
+}

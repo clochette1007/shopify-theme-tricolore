@@ -1,0 +1,45 @@
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <h2 class="section-title">{{ section.settings.title | default: 'Ce qu'ils en disent' }}</h2>
+    <div class="grid-3" style="margin-top:48px;">
+      {%- for block in section.blocks -%}
+        <div style="background:#fff;border-radius:8px;padding:28px;box-shadow:var(--shadow);border-left:4px solid var(--color-accent);">
+          <div style="font-size:20px;color:var(--color-accent);margin-bottom:10px;">★★★★★</div>
+          <p style="font-size:15px;color:#444;line-height:1.7;margin-bottom:16px;font-style:italic;">« {{ block.settings.text | default: 'Produit exceptionnel, livraison rapide. Je recommande vivement !' }} »</p>
+          <p style="font-weight:800;font-size:13px;color:var(--color-primary);text-transform:uppercase;letter-spacing:0.05em;">— {{ block.settings.name | default: 'Client satisfait' }}</p>
+          {%- if block.settings.location != blank -%}
+            <p style="font-size:12px;color:var(--color-muted);">{{ block.settings.location }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Témoignages",
+  "settings": [
+    {"type": "text", "id": "title", "label": "Titre", "default": "Ce qu'ils en disent"}
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Témoignage",
+      "settings": [
+        {"type": "textarea", "id": "text",     "label": "Témoignage",  "default": "Produit exceptionnel, livraison ultra rapide. Made in France comme promis !"},
+        {"type": "text",     "id": "name",     "label": "Nom client",  "default": "Marie D."},
+        {"type": "text",     "id": "location", "label": "Ville",        "default": "Paris, France"}
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Témoignages",
+    "blocks": [
+      {"type": "testimonial", "settings": {"name": "Marie D.",    "location": "Paris",       "text": "Produit exceptionnel, livraison ultra rapide !"}},
+      {"type": "testimonial", "settings": {"name": "Thomas L.",  "location": "Lyon",        "text": "Qualité irréprochable, je commande régulièrement."}},
+      {"type": "testimonial", "settings": {"name": "Sophie M.",  "location": "Bordeaux",    "text": "Enfin une marque 100% française qui tient ses promesses !"}}
+    ]
+  }]
+}
+{% endschema %}
