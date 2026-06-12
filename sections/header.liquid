@@ -1,60 +1,69 @@
 <style>
-.site-header { background: var(--color-primary); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
-.announcement-bar { background: #001a70; color: #fff; text-align: center; padding: 8px 16px; font-size: 13px; font-weight: 600; letter-spacing: 0.05em; }
-.header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 68px; }
-.header-logo { color: #fff; font-size: 24px; font-weight: 900; text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; }
+.site-header {
+  background: var(--color-primary);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+.header-logo {
+  color: #fff;
+  font-size: 26px;
+  font-weight: 900;
+  text-decoration: none;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
 .header-logo span { color: var(--color-accent); }
-.header-nav { display: flex; gap: 32px; list-style: none; margin: 0; padding: 0; }
-.header-nav a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
-.header-nav a:hover { color: var(--color-accent); }
-.header-icons { display: flex; gap: 20px; align-items: center; }
-.header-icons a { color: #fff; text-decoration: none; font-size: 13px; font-weight: 600; transition: color 0.2s; display: flex; align-items: center; gap: 6px; }
-.header-icons a:hover { color: var(--color-accent); }
-.cart-count { background: var(--color-accent); color: #fff; border-radius: 50%; width: 18px; height: 18px; font-size: 11px; display: flex; align-items: center; justify-content: center; font-weight: 800; }
-.nav-toggle { display: none; background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; }
-@media (max-width: 768px) {
-  .header-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--color-primary); flex-direction: column; padding: 20px 24px; gap: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-  .header-nav.open { display: flex; }
-  .nav-toggle { display: block; }
-  .header-icons span { display: none; }
+.header-cart {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  background: var(--color-accent);
+  padding: 10px 20px;
+  border-radius: 4px;
+  transition: opacity 0.2s;
+}
+.header-cart:hover { opacity: 0.88; }
+.cart-icon { font-size: 18px; }
+.cart-count {
+  background: #fff;
+  color: var(--color-accent);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
 }
 </style>
-
-{% if section.settings.show_announcement %}
-<div class="announcement-bar">{{ section.settings.announcement_text }}</div>
-{% endif %}
 
 <header class="site-header">
   <div class="header-inner">
     <a href="/" class="header-logo">CRAFT<span>ER</span></a>
-
-    <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">&#9776;</button>
-
-    <ul class="header-nav">
-      <li><a href="/">Accueil</a></li>
-      <li><a href="/collections/all">Boutique</a></li>
-      <li><a href="/collections">Collections</a></li>
-      <li><a href="/pages/a-propos">À propos</a></li>
-      <li><a href="/pages/contact">Contact</a></li>
-    </ul>
-
-    <div class="header-icons">
-      <a href="/search" aria-label="Rechercher">🔍 <span>Rechercher</span></a>
-      <a href="/account" aria-label="Mon compte">👤 <span>Compte</span></a>
-      <a href="/cart" aria-label="Panier">
-        🛒
-        <span class="cart-count">{{ cart.item_count }}</span>
-      </a>
-    </div>
+    <a href="/cart" class="header-cart">
+      <span class="cart-icon">🛒</span>
+      Panier
+      <span class="cart-count">{{ cart.item_count }}</span>
+    </a>
   </div>
 </header>
 
 {% schema %}
-{
-  "name": "En-tête",
-  "settings": [
-    { "type": "checkbox", "id": "show_announcement", "label": "Afficher la barre d'annonce", "default": true },
-    { "type": "text", "id": "announcement_text", "label": "Texte de l'annonce", "default": "🇫🇷 Livraison offerte en France dès 40€" }
-  ]
-}
+{ "name": "En-tête", "settings": [] }
 {% endschema %}

@@ -1,64 +1,55 @@
 <style>
-.site-footer { background: var(--color-primary); color: #fff; padding: 60px 0 0; }
-.footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
-.footer-logo { font-size: 22px; font-weight: 900; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px; }
+.site-footer {
+  background: var(--color-primary);
+  color: #fff;
+  padding: 40px 24px;
+  text-align: center;
+}
+.footer-logo {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
 .footer-logo span { color: var(--color-accent); }
-.footer-desc { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 20px; }
-.footer-col h4 { font-size: 12px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; color: rgba(255,255,255,0.5); }
-.footer-col ul { list-style: none; padding: 0; margin: 0; }
-.footer-col ul li { margin-bottom: 10px; }
-.footer-col ul a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; transition: color 0.2s; }
-.footer-col ul a:hover { color: var(--color-accent); }
-.footer-bottom { max-width: 1200px; margin: 40px auto 0; padding: 20px 24px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-.footer-copy { font-size: 13px; color: rgba(255,255,255,0.5); }
-.footer-payments { font-size: 13px; color: rgba(255,255,255,0.5); }
-@media (max-width: 768px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 480px) { .footer-inner { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
+.footer-tagline {
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.footer-links a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--color-accent); }
+.footer-copy {
+  color: rgba(255,255,255,0.4);
+  font-size: 12px;
+}
 </style>
 
 <footer class="site-footer">
-  <div class="footer-inner">
-    <div>
-      <div class="footer-logo">CRAFT<span>ER</span></div>
-      <p class="footer-desc">Des décapsuleurs imprimés en 3D, pensés pour ceux qui aiment partager un bon verre.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Boutique</h4>
-      <ul>
-        <li><a href="/collections/all">Tous les produits</a></li>
-        <li><a href="/collections">Collections</a></li>
-        <li><a href="/pages/nouveautes">Nouveautés</a></li>
-        <li><a href="/pages/soldes">Soldes</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Aide</h4>
-      <ul>
-        <li><a href="/pages/livraison">Livraison</a></li>
-        <li><a href="/pages/retours">Retours</a></li>
-        <li><a href="/pages/faq">FAQ</a></li>
-        <li><a href="/pages/contact">Contact</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Suivez-nous</h4>
-      <ul>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">TikTok</a></li>
-        <li><a href="#">Pinterest</a></li>
-      </ul>
-    </div>
+  <div class="footer-logo">CRAFT<span>ER</span></div>
+  <p class="footer-tagline">Prêts. Marquez. Décapsulez.</p>
+  <div class="footer-links">
+    <a href="/pages/livraison">Livraison</a>
+    <a href="/pages/retours">Retours</a>
+    <a href="/pages/contact">Contact</a>
+    <a href="/cart">Panier</a>
   </div>
-  <div class="footer-bottom">
-    <p class="footer-copy">© 2026 Crafter. Prêts. Marquez. Décapsulez.</p>
-    <p class="footer-payments">💳 CB · Visa · Mastercard · PayPal · Apple Pay</p>
-  </div>
+  <p class="footer-copy">© 2026 Crafter · 💳 CB · Visa · Mastercard · PayPal</p>
 </footer>
 
 {% schema %}
-{
-  "name": "Pied de page",
-  "settings": []
-}
+{ "name": "Pied de page", "settings": [] }
 {% endschema %}
