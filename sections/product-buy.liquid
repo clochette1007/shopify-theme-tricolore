@@ -17,7 +17,6 @@
   box-shadow: 0 8px 40px rgba(0,35,149,0.12);
 }
 .product-buy__image img { width: 100%; height: auto; display: block; }
-.product-buy__info {}
 .product-buy__badge {
   display: inline-block;
   background: var(--color-accent);
@@ -52,7 +51,6 @@
 }
 .product-buy__desc ul { padding-left: 20px; margin-top: 12px; }
 .product-buy__desc li { margin-bottom: 8px; }
-.product-buy__form {}
 .btn-buy {
   width: 100%;
   background: var(--color-accent);
@@ -94,9 +92,6 @@
   margin-top: 24px;
 }
 .reassurance-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
   font-size: 13px;
   color: #777;
   font-weight: 600;
@@ -117,65 +112,70 @@
 }
 </style>
 
-{%- assign product = all_products['decapsuleur-catapulte-crafter'] -%}
-{%- if product == empty -%}
-  {%- assign product = all_products.first -%}
-{%- endif -%}
-
 <section class="product-buy" id="acheter">
   <div class="product-buy-inner">
-    <div class="product-buy__image">
-      {%- if product.featured_image -%}
-        <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title | escape }}">
-      {%- else -%}
-        <img src="https://cdn.shopify.com/s/files/1/1054/2147/2081/files/photo.png?v=1781266719" alt="Décapsuleur Crafter">
-      {%- endif -%}
-    </div>
-    <div class="product-buy__info">
-      <span class="product-buy__badge">★ Bestseller</span>
-      <h2 class="product-buy__title">{{ product.title | default: 'Décapsuleur Catapulte Crafter' }}</h2>
-      <div class="product-buy__price">{{ product.price | money }}</div>
-      <div class="product-buy__desc">{{ product.description }}</div>
 
-      {%- form 'product', product, id: 'product-form-homepage' -%}
-        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-        <input type="hidden" name="quantity" value="1">
-        <div class="added-msg" id="added-msg">✅ Ajouté au panier !</div>
-        <button type="submit" class="btn-buy" id="btn-buy">🛒 Ajouter au panier</button>
-        <a href="/cart" class="btn-secondary">Voir mon panier</a>
-      {%- endform -%}
+    <div class="product-buy__image">
+      <img src="https://cdn.shopify.com/s/files/1/1054/2147/2081/files/photo_038ccb5e-dc9b-4584-a220-345a40a81f1e.png?v=1781269346" alt="Décapsuleur Catapulte Crafter">
+    </div>
+
+    <div>
+      <span class="product-buy__badge">★ Bestseller</span>
+      <h2 class="product-buy__title">Décapsuleur Catapulte Crafter</h2>
+      <div class="product-buy__price">17,99 €</div>
+      <div class="product-buy__desc">
+        <p><strong>Lance ta capsule, célèbre le but.</strong></p>
+        <p>Le décapsuleur Crafter propulse ta capsule jusqu'à 5 mètres d'une simple pression. Conçu pour les soirées foot, les apéros entre amis et ceux qui ouvrent leur bière avec style.</p>
+        <ul>
+          <li>✅ Ouverture ultra rapide et sans effort</li>
+          <li>🎯 Catapulte la capsule jusqu'à 5 m</li>
+          <li>🖤 Design compact et solide</li>
+          <li>🍺 Idéal pour les soirées et cadeaux</li>
+        </ul>
+      </div>
+
+      <div class="added-msg" id="added-msg">✅ Ajouté au panier !</div>
+      <button class="btn-buy" id="btn-buy" onclick="ajouterAuPanier()">🛒 Ajouter au panier</button>
+      <a href="/cart" class="btn-secondary">Voir mon panier</a>
 
       <div class="product-buy__reassurance">
         <span class="reassurance-item">🚚 Livraison rapide</span>
+        &nbsp;·&nbsp;
         <span class="reassurance-item">🔒 Paiement sécurisé</span>
+        &nbsp;·&nbsp;
         <span class="reassurance-item">🔄 Retours faciles</span>
       </div>
     </div>
+
   </div>
 </section>
 
 <script>
-(function(){
-  var form = document.getElementById('product-form-homepage');
+function ajouterAuPanier() {
   var msg = document.getElementById('added-msg');
   var btn = document.getElementById('btn-buy');
-  if (!form) return;
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var fd = new FormData(form);
-    fetch('/cart/add.js', { method: 'POST', body: fd })
-      .then(function(r){ return r.json(); })
-      .then(function(){
-        msg.style.display = 'block';
-        btn.textContent = '✅ Ajouté !';
-        setTimeout(function(){ msg.style.display='none'; btn.textContent='🛒 Ajouter au panier'; }, 3000);
-        fetch('/cart.js').then(function(r){ return r.json(); }).then(function(c){
-          var el = document.querySelector('.cart-count');
-          if(el) el.textContent = c.item_count;
-        });
-      });
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: 54048264520017, quantity: 1 })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function() {
+    msg.style.display = 'block';
+    btn.textContent = '✅ Ajouté !';
+    setTimeout(function() {
+      msg.style.display = 'none';
+      btn.textContent = '🛒 Ajouter au panier';
+    }, 3000);
+    fetch('/cart.js').then(function(r) { return r.json(); }).then(function(c) {
+      var el = document.querySelector('.cart-count');
+      if (el) el.textContent = c.item_count;
+    });
+  })
+  .catch(function() {
+    window.location.href = '/cart/add?id=54048264520017&quantity=1';
   });
-})();
+}
 </script>
 
 {% schema %}
