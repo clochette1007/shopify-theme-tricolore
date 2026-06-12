@@ -1,31 +1,177 @@
 <style>
-.hero { background: var(--color-primary); padding: 100px 24px; text-align: center; position: relative; overflow: hidden; }
-.hero::before { content: ''; position: absolute; top: -50%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(237,41,57,0.2) 0%, transparent 70%); pointer-events: none; }
-.hero-eyebrow { display: inline-block; background: var(--color-accent); color: #fff; font-size: 12px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; padding: 6px 16px; border-radius: 2px; margin-bottom: 24px; }
-.hero h1 { color: #fff; font-size: clamp(36px, 6vw, 72px); font-weight: 900; text-transform: uppercase; line-height: 1.1; margin-bottom: 20px; }
-.hero-sub { color: rgba(255,255,255,0.8); font-size: clamp(16px, 2vw, 20px); max-width: 560px; margin: 0 auto 40px; line-height: 1.6; }
+.hero {
+  background: var(--color-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 60px 24px;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(237,41,57,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* TOP SECTION : titre + sous-titre */
+.hero-top {
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+  z-index: 2;
+}
+.hero-eyebrow {
+  display: inline-block;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 2px;
+  margin-bottom: 24px;
+}
+.hero-top h1 {
+  color: #fff;
+  font-size: clamp(40px, 7vw, 88px);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+.hero-top h1 span { color: var(--color-accent); }
+.hero-sub {
+  color: rgba(255,255,255,0.8);
+  font-size: clamp(16px, 2vw, 20px);
+  max-width: 560px;
+  margin: 0 auto 36px;
+  line-height: 1.6;
+}
 .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-.hero-ctas .btn-primary { background: var(--color-accent); color: #fff; padding: 16px 36px; border-radius: 4px; font-weight: 800; font-size: 15px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: opacity 0.2s; }
+.hero-ctas .btn-primary {
+  background: var(--color-accent);
+  color: #fff;
+  padding: 16px 36px;
+  border-radius: 4px;
+  font-weight: 800;
+  font-size: 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: opacity 0.2s;
+}
 .hero-ctas .btn-primary:hover { opacity: 0.88; }
-.hero-ctas .btn-outline { border: 2px solid rgba(255,255,255,0.6); color: #fff; padding: 16px 36px; border-radius: 4px; font-weight: 800; font-size: 15px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: border-color 0.2s; }
+.hero-ctas .btn-outline {
+  border: 2px solid rgba(255,255,255,0.6);
+  color: #fff;
+  padding: 16px 36px;
+  border-radius: 4px;
+  font-weight: 800;
+  font-size: 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: border-color 0.2s;
+}
 .hero-ctas .btn-outline:hover { border-color: #fff; }
+
+/* BOTTOM SECTION : photo + slogan côte à côte */
+.hero-bottom {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+}
+.hero-photo {
+  flex: 0 0 auto;
+  width: clamp(260px, 35vw, 480px);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.hero-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.hero-slogan {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.hero-slogan-line {
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  color: #fff;
+  white-space: nowrap;
+}
+.hero-slogan-line:nth-child(1) { color: #fff; }
+.hero-slogan-line:nth-child(2) { color: var(--color-accent); }
+.hero-slogan-line:nth-child(3) {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-slogan-line:nth-child(3)::after {
+  content: '🍺';
+  font-size: 0.6em;
+}
+
+@media (max-width: 768px) {
+  .hero-bottom { flex-direction: column; gap: 36px; }
+  .hero-slogan { align-items: center; }
+  .hero-slogan-line { font-size: clamp(28px, 8vw, 48px); }
+}
 </style>
 
 <section class="hero">
-  {%- if section.settings.eyebrow != blank -%}
-    <div class="hero-eyebrow">{{ section.settings.eyebrow }}</div>
-  {%- endif -%}
-  <h1>{{ section.settings.heading | default: 'Fait en France. Pour la France.' }}</h1>
-  {%- if section.settings.subheading != blank -%}
-    <p class="hero-sub">{{ section.settings.subheading }}</p>
-  {%- endif -%}
-  <div class="hero-ctas">
-    {%- if section.settings.cta_label != blank -%}
-      <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="btn-primary">{{ section.settings.cta_label }}</a>
+  <!-- Titre principal -->
+  <div class="hero-top">
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="hero-eyebrow">{{ section.settings.eyebrow }}</div>
     {%- endif -%}
-    {%- if section.settings.cta2_label != blank -%}
-      <a href="{{ section.settings.cta2_url | default: '/pages/a-propos' }}" class="btn-outline">{{ section.settings.cta2_label }}</a>
+    <h1>{{ section.settings.heading | default: 'Imprimé en 3D<br>pour <span>trinquer</span><br>aux Français.' }}</h1>
+    {%- if section.settings.subheading != blank -%}
+      <p class="hero-sub">{{ section.settings.subheading }}</p>
     {%- endif -%}
+    <div class="hero-ctas">
+      {%- if section.settings.cta_label != blank -%}
+        <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="btn-primary">{{ section.settings.cta_label }}</a>
+      {%- endif -%}
+      {%- if section.settings.cta2_label != blank -%}
+        <a href="{{ section.settings.cta2_url | default: '/pages/a-propos' }}" class="btn-outline">{{ section.settings.cta2_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <!-- Photo + slogan -->
+  <div class="hero-bottom">
+    <div class="hero-photo">
+      <img src="{{ section.settings.product_photo | default: 'https://cdn.shopify.com/s/files/1/1054/2147/2081/files/photo.png?v=1781266719' }}" alt="Crafter décapsuleur">
+    </div>
+    <div class="hero-slogan">
+      <div class="hero-slogan-line">PRÊTS</div>
+      <div class="hero-slogan-line">MARQUEZ</div>
+      <div class="hero-slogan-line">DECAPSULEZ !</div>
+    </div>
   </div>
 </section>
 
@@ -34,12 +180,13 @@
   "name": "Bannière héro",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "🇫🇷 Nouvelle collection 2026" },
-    { "type": "text", "id": "heading", "label": "Titre", "default": "Fait en France. Pour la France." },
-    { "type": "textarea", "id": "subheading", "label": "Sous-titre", "default": "Des produits pensés pour ceux qui aiment leur pays." },
+    { "type": "text", "id": "heading", "label": "Titre (HTML autorisé)", "default": "Imprimé en 3D pour trinquer aux Français." },
+    { "type": "textarea", "id": "subheading", "label": "Sous-titre", "default": "Des décapsuleurs imprimés en 3D, conçus pour ceux qui aiment partager un bon verre." },
     { "type": "text", "id": "cta_label", "label": "Bouton principal", "default": "Découvrir la boutique" },
     { "type": "url", "id": "cta_url", "label": "Lien bouton principal" },
     { "type": "text", "id": "cta2_label", "label": "Bouton secondaire", "default": "Notre histoire" },
-    { "type": "url", "id": "cta2_url", "label": "Lien bouton secondaire" }
+    { "type": "url", "id": "cta2_url", "label": "Lien bouton secondaire" },
+    { "type": "text", "id": "product_photo", "label": "URL photo produit", "default": "https://cdn.shopify.com/s/files/1/1054/2147/2081/files/photo.png?v=1781266719" }
   ],
   "presets": [{ "name": "Bannière héro" }]
 }

@@ -25,8 +25,8 @@
     </div>
     <div class="editorial-text">
       {%- if section.settings.eyebrow != blank -%}<span class="editorial-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
-      <h2>{{ section.settings.heading | default: 'Made in France, fait avec passion.' }}</h2>
-      <p>{{ section.settings.text | default: 'Chaque produit est conçu et fabriqué en France.' }}</p>
+      <h2>{{ section.settings.heading | default: 'Imprimé en 3D, conçu pour trinquer.' }}</h2>
+      <p>{{ section.settings.text | default: 'Chaque décapsuleur Crafter est conçu et imprimé en 3D, pour ceux qui aiment partager un bon verre.' }}</p>
       {%- if section.settings.cta_label != blank -%}
         <a href="{{ section.settings.cta_url | default: '/pages/a-propos' }}">{{ section.settings.cta_label }}</a>
       {%- endif -%}
@@ -41,8 +41,8 @@
     { "type": "image_picker", "id": "image", "label": "Image" },
     { "type": "select", "id": "image_position", "label": "Position image", "options": [{"value":"left","label":"Gauche"},{"value":"right","label":"Droite"}], "default": "left" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Notre histoire" },
-    { "type": "text", "id": "heading", "label": "Titre", "default": "Made in France, fait avec passion." },
-    { "type": "textarea", "id": "text", "label": "Texte", "default": "Chaque produit est conçu et fabriqué en France, avec des matériaux sélectionnés pour leur qualité." },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Imprimé en 3D, conçu pour trinquer." },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Chaque décapsuleur Crafter est conçu et imprimé en 3D, pour ceux qui aiment partager un bon verre." },
     { "type": "text", "id": "cta_label", "label": "Bouton", "default": "En savoir plus" },
     { "type": "url", "id": "cta_url", "label": "Lien" }
   ],

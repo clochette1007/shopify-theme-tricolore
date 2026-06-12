@@ -10,7 +10,7 @@
 </style>
 
 <section class="newsletter">
-  <h2>{{ section.settings.title | default: 'Rejoignez la communauté 🇫🇷' }}</h2>
+  <h2>{{ section.settings.title | default: 'Rejoignez la communauté Crafter 🇫🇷' }}</h2>
   <p>{{ section.settings.subtitle | default: 'Offres exclusives, nouveautés — directement dans votre boîte mail.' }}</p>
   {%- form 'customer', id: 'newsletter-form' -%}
     <input type="hidden" name="contact[tags]" value="newsletter">
@@ -29,7 +29,7 @@
 {
   "name": "Newsletter",
   "settings": [
-    { "type": "text", "id": "title", "label": "Titre", "default": "Rejoignez la communauté 🇫🇷" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Rejoignez la communauté Crafter 🇫🇷" },
     { "type": "text", "id": "subtitle", "label": "Sous-titre", "default": "Offres exclusives, nouveautés — directement dans votre boîte mail." },
     { "type": "text", "id": "cta", "label": "Texte bouton", "default": "S'inscrire" }
   ],
