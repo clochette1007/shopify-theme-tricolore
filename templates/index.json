@@ -3,10 +3,10 @@
     "hero": {
       "type": "hero-banner",
       "settings": {
-        "eyebrow": "🇫🇷 Nouvelle collection 2026",
+        "eyebrow": "\ud83c\uddeb\ud83c\uddf7 Nouvelle collection 2026",
         "heading": "Fait en France. Pour la France.",
-        "subheading": "Des produits pensés pour ceux qui aiment leur pays.",
-        "cta_label": "Découvrir la boutique",
+        "subheading": "Des produits pens\u00e9s pour ceux qui aiment leur pays.",
+        "cta_label": "D\u00e9couvrir la boutique",
         "cta_url": "/collections/all",
         "cta2_label": "Notre histoire",
         "cta2_url": "/pages/a-propos"
@@ -16,7 +16,7 @@
       "type": "featured-collection",
       "settings": {
         "title": "Nos Produits",
-        "subtitle": "Sélection made in France",
+        "subtitle": "S\u00e9lection made in France",
         "products_count": 4,
         "cta_label": "Voir toute la boutique",
         "cta_url": "/collections/all"
@@ -27,7 +27,7 @@
       "settings": {
         "eyebrow": "Notre histoire",
         "heading": "Made in France, fait avec passion.",
-        "text": "Chaque produit est conçu et fabriqué en France, avec des matériaux sélectionnés pour leur qualité et leur durabilité.",
+        "text": "Chaque produit est con\u00e7u et fabriqu\u00e9 en France, avec des mat\u00e9riaux s\u00e9lectionn\u00e9s pour leur qualit\u00e9 et leur durabilit\u00e9.",
         "cta_label": "En savoir plus",
         "cta_url": "/pages/a-propos",
         "image_position": "right",
@@ -39,7 +39,7 @@
       "settings": { "title": "Nos Collections" },
       "blocks": {
         "block1": {"type": "collection_tile", "settings": {"title": "Accessoires"}},
-        "block2": {"type": "collection_tile", "settings": {"title": "Vêtements"}},
+        "block2": {"type": "collection_tile", "settings": {"title": "V\u00eatements"}},
         "block3": {"type": "collection_tile", "settings": {"title": "Cadeaux"}}
       },
       "block_order": ["block1", "block2", "block3"]
@@ -49,16 +49,16 @@
       "settings": { "title": "Ce qu'ils en disent" },
       "blocks": {
         "t1": {"type": "testimonial", "settings": {"text": "Produit exceptionnel, livraison ultra rapide !", "name": "Marie D.", "location": "Paris"}},
-        "t2": {"type": "testimonial", "settings": {"text": "Qualité irréprochable, je commande régulièrement.", "name": "Thomas L.", "location": "Lyon"}},
-        "t3": {"type": "testimonial", "settings": {"text": "Enfin une marque 100% française qui tient ses promesses !", "name": "Sophie M.", "location": "Bordeaux"}}
+        "t2": {"type": "testimonial", "settings": {"text": "Qualit\u00e9 irr\u00e9prochable, je commande r\u00e9guli\u00e8rement.", "name": "Thomas L.", "location": "Lyon"}},
+        "t3": {"type": "testimonial", "settings": {"text": "Enfin une marque 100% fran\u00e7aise qui tient ses promesses !", "name": "Sophie M.", "location": "Bordeaux"}}
       },
       "block_order": ["t1", "t2", "t3"]
     },
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "title": "Rejoignez la communauté 🇫🇷",
-        "subtitle": "Offres exclusives, nouveautés et coups de cœur — directement dans votre boîte mail.",
+        "title": "Rejoignez la communaut\u00e9 \ud83c\uddeb\ud83c\uddf7",
+        "subtitle": "Offres exclusives, nouveaut\u00e9s et coups de c\u0153ur \u2014 directement dans votre bo\u00eete mail.",
         "cta": "S'inscrire"
       }
     }

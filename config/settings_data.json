@@ -1,0 +1,24 @@
+{
+  "current": {
+    "color_primary": "#002395",
+    "color_accent": "#ED2939",
+    "color_bg": "#FFFFFF",
+    "color_text": "#111111",
+    "page_width": 1200,
+    "show_announcement": true,
+    "announcement_text": "\ud83c\uddeb\ud83c\uddf7 Livraison offerte en France d\u00e8s 40\u20ac"
+  },
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {}
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "description": "Des produits pens\u00e9s pour ceux qui aiment leur pays.",
+        "email": "contact@boutique.fr"
+      }
+    }
+  }
+}

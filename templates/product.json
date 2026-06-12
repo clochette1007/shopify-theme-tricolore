@@ -1,9 +1,9 @@
 {
   "sections": {
-    "product-page": {
-      "type": "custom-product-cdm",
+    "main": {
+      "type": "main-product",
       "settings": {}
     }
   },
-  "order": ["product-page"]
+  "order": ["main"]
 }
