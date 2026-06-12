@@ -1,93 +1,64 @@
-<footer style="background:var(--color-primary);color:#fff;padding:64px 0 0;">
-  <div class="container">
-    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;">
+<style>
+.site-footer { background: var(--color-primary); color: #fff; padding: 60px 0 0; }
+.footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+.footer-logo { font-size: 22px; font-weight: 900; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px; }
+.footer-logo span { color: var(--color-accent); }
+.footer-desc { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 20px; }
+.footer-col h4 { font-size: 12px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 16px; color: rgba(255,255,255,0.5); }
+.footer-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+.footer-col ul a:hover { color: var(--color-accent); }
+.footer-bottom { max-width: 1200px; margin: 40px auto 0; padding: 20px 24px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-copy { font-size: 13px; color: rgba(255,255,255,0.5); }
+.footer-payments { font-size: 13px; color: rgba(255,255,255,0.5); }
+@media (max-width: 768px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .footer-inner { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
+</style>
 
-      <!-- COL 1 : LOGO + DESC -->
-      <div>
-        <p style="font-family:var(--font-heading);font-size:20px;font-weight:900;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:14px;">{{ shop.name }}</p>
-        <p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:20px;">{{ section.settings.description | default: 'Des produits fabriqués en France, pour ceux qui aiment leur pays.' }}</p>
-        <div style="display:flex;gap:12px;">
-          {%- if section.settings.instagram != blank -%}
-            <a href="{{ section.settings.instagram }}" style="color:rgba(255,255,255,0.7);font-size:22px;" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">📷</a>
-          {%- endif -%}
-          {%- if section.settings.facebook != blank -%}
-            <a href="{{ section.settings.facebook }}" style="color:rgba(255,255,255,0.7);font-size:22px;" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">👍</a>
-          {%- endif -%}
-          {%- if section.settings.tiktok != blank -%}
-            <a href="{{ section.settings.tiktok }}" style="color:rgba(255,255,255,0.7);font-size:22px;" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">🎵</a>
-          {%- endif -%}
-        </div>
-      </div>
-
-      <!-- COL 2 : BOUTIQUE -->
-      <div>
-        <h4 style="font-size:13px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:18px;color:#fff;">Boutique</h4>
-        <ul style="display:flex;flex-direction:column;gap:10px;">
-          <li><a href="/collections/all"    style="font-size:14px;color:rgba(255,255,255,0.7);" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Tous les produits</a></li>
-          <li><a href="/collections/nouveautes" style="font-size:14px;color:rgba(255,255,255,0.7);" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Nouveautés</a></li>
-          <li><a href="/collections/meilleures-ventes" style="font-size:14px;color:rgba(255,255,255,0.7);" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Meilleures ventes</a></li>
-          <li><a href="/collections/soldes" style="font-size:14px;color:rgba(255,255,255,0.7);" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Soldes</a></li>
-        </ul>
-      </div>
-
-      <!-- COL 3 : AIDE -->
-      <div>
-        <h4 style="font-size:13px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:18px;color:#fff;">Aide</h4>
-        <ul style="display:flex;flex-direction:column;gap:10px;">
-          <li><a href="/pages/faq"              style="font-size:14px;color:rgba(255,255,255,0.7);" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">FAQ</a></li>
-          <li><a href="/pages/livraison"         style="font-size:14px;color:rgba(255,255,255,0.7);" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Livraison & retours</a></li>
-          <li><a href="/pages/contact"           style="font-size:14px;color:rgba(255,255,255,0.7);" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Contact</a></li>
-          <li><a href="/pages/mentions-legales"  style="font-size:14px;color:rgba(255,255,255,0.7);" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Mentions légales</a></li>
-          <li><a href="/pages/confidentialite"   style="font-size:14px;color:rgba(255,255,255,0.7);" onmouseover="this.style.color='#ED2939'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Confidentialité</a></li>
-        </ul>
-      </div>
-
-      <!-- COL 4 : CONTACT -->
-      <div>
-        <h4 style="font-size:13px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:18px;color:#fff;">Contact</h4>
-        <ul style="display:flex;flex-direction:column;gap:10px;">
-          {%- if section.settings.email != blank -%}
-            <li><a href="mailto:{{ section.settings.email }}" style="font-size:14px;color:rgba(255,255,255,0.7);">📧 {{ section.settings.email }}</a></li>
-          {%- endif -%}
-          <li style="font-size:14px;color:rgba(255,255,255,0.7);">⏰ Lun-Ven, 9h–18h</li>
-          <li style="font-size:14px;color:rgba(255,255,255,0.7);">📍 France 🇫🇷</li>
-        </ul>
-      </div>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">TRI<span>CO</span>LORE</div>
+      <p class="footer-desc">Des produits pensés pour ceux qui aiment leur pays. Fabriqués en France, avec passion.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Boutique</h4>
+      <ul>
+        <li><a href="/collections/all">Tous les produits</a></li>
+        <li><a href="/collections">Collections</a></li>
+        <li><a href="/pages/nouveautes">Nouveautés</a></li>
+        <li><a href="/pages/soldes">Soldes</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Aide</h4>
+      <ul>
+        <li><a href="/pages/livraison">Livraison</a></li>
+        <li><a href="/pages/retours">Retours</a></li>
+        <li><a href="/pages/faq">FAQ</a></li>
+        <li><a href="/pages/contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Suivez-nous</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">TikTok</a></li>
+        <li><a href="#">Pinterest</a></li>
+      </ul>
     </div>
   </div>
-
-  <!-- BOTTOM BAR -->
-  <div style="border-top:1px solid rgba(255,255,255,0.15);padding:20px 24px;">
-    <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
-      <p style="font-size:13px;color:rgba(255,255,255,0.6);">© 2026 {{ shop.name }}. Fait avec ❤️ en France</p>
-      <div style="display:flex;gap:8px;align-items:center;">
-        <span style="font-size:22px;">💳</span>
-        <span style="font-size:22px;">🏧</span>
-        <span style="font-size:13px;color:rgba(255,255,255,0.5);">Visa · Mastercard · PayPal · Apple Pay</span>
-      </div>
-    </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 Tricolore. Fait avec ❤️ en France</p>
+    <p class="footer-payments">💳 CB · Visa · Mastercard · PayPal · Apple Pay</p>
   </div>
 </footer>
-
-<style>
-@media (max-width: 768px) {
-  footer .container > div { grid-template-columns: 1fr 1fr !important; }
-}
-@media (max-width: 480px) {
-  footer .container > div { grid-template-columns: 1fr !important; }
-}
-</style>
 
 {% schema %}
 {
   "name": "Pied de page",
-  "settings": [
-    {"type": "textarea","id": "description","label": "Description boutique","default": "Des produits fabriqués en France, pour ceux qui aiment leur pays."},
-    {"type": "text",    "id": "email",      "label": "Email contact",       "default": "contact@maison.fr"},
-    {"type": "url",     "id": "instagram",  "label": "Instagram"},
-    {"type": "url",     "id": "facebook",   "label": "Facebook"},
-    {"type": "url",     "id": "tiktok",     "label": "TikTok"}
-  ],
-  "presets": [{"name": "Pied de page"}]
+  "settings": []
 }
 {% endschema %}

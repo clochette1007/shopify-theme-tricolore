@@ -1,34 +1,38 @@
-<section style="background:var(--color-accent);padding:80px 24px;text-align:center;">
-  <div class="container" style="max-width:600px;">
-    <h2 style="color:#fff;margin-bottom:12px;">{{ section.settings.title | default: 'Rejoignez la communauté 🇫🇷' }}</h2>
-    <p style="color:rgba(255,255,255,0.85);font-size:16px;margin-bottom:32px;">{{ section.settings.subtitle | default: 'Offres exclusives, nouveautés et coups de cœur — directement dans votre boîte mail.' }}</p>
+<style>
+.newsletter { background: var(--color-accent); padding: 80px 24px; text-align: center; }
+.newsletter h2 { color: #fff; font-size: clamp(26px,4vw,40px); font-weight: 900; text-transform: uppercase; margin-bottom: 12px; }
+.newsletter p { color: rgba(255,255,255,0.85); font-size: 16px; margin-bottom: 32px; }
+.newsletter-form { display: flex; gap: 12px; justify-content: center; max-width: 500px; margin: 0 auto; flex-wrap: wrap; }
+.newsletter-form input[type=email] { flex: 1; min-width: 240px; padding: 14px 20px; border: none; border-radius: 4px; font-size: 15px; }
+.newsletter-form button { background: var(--color-primary); color: #fff; border: none; padding: 14px 28px; border-radius: 4px; font-weight: 800; font-size: 15px; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: opacity 0.2s; }
+.newsletter-form button:hover { opacity: 0.88; }
+.newsletter-rgpd { color: rgba(255,255,255,0.6); font-size: 11px; margin-top: 16px; }
+</style>
 
-    {%- form 'customer', id: 'newsletter-form' -%}
-      <input type="hidden" name="contact[tags]" value="newsletter">
-      <div style="display:flex;gap:0;max-width:480px;margin:0 auto 16px;">
-        <input
-          type="email"
-          name="contact[email]"
-          placeholder="Votre adresse email"
-          required
-          style="flex:1;border-radius:4px 0 0 4px;border:none;font-size:15px;padding:14px 18px;"
-        >
-        <button type="submit" class="btn btn--primary" style="border-radius:0 4px 4px 0;white-space:nowrap;">{{ section.settings.cta | default: "S'inscrire" }}</button>
-      </div>
-    {%- endform -%}
-
-    <p style="font-size:11px;color:rgba(255,255,255,0.65);">En vous inscrivant, vous acceptez notre <a href="/pages/confidentialite" style="color:rgba(255,255,255,0.85);text-decoration:underline;">politique de confidentialité</a>. Désinscription possible à tout moment.</p>
-  </div>
+<section class="newsletter">
+  <h2>{{ section.settings.title | default: 'Rejoignez la communauté 🇫🇷' }}</h2>
+  <p>{{ section.settings.subtitle | default: 'Offres exclusives, nouveautés — directement dans votre boîte mail.' }}</p>
+  {%- form 'customer', id: 'newsletter-form' -%}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+    <div class="newsletter-form">
+      <input type="email" name="contact[email]" placeholder="votre@email.fr" required autocomplete="email">
+      <button type="submit">{{ section.settings.cta | default: "S'inscrire" }}</button>
+    </div>
+    {%- if form.posted_successfully? -%}
+      <p style="color:#fff;font-weight:700;margin-top:16px;">✅ Merci, vous êtes inscrit(e) !</p>
+    {%- endif -%}
+  {%- endform -%}
+  <p class="newsletter-rgpd">En vous inscrivant, vous acceptez de recevoir nos emails. Conformément au RGPD, vous pouvez vous désinscrire à tout moment.</p>
 </section>
 
 {% schema %}
 {
   "name": "Newsletter",
   "settings": [
-    {"type": "text",     "id": "title",    "label": "Titre",      "default": "Rejoignez la communauté 🇫🇷"},
-    {"type": "textarea","id": "subtitle", "label": "Sous-titre", "default": "Offres exclusives, nouveautés et coups de cœur."},
-    {"type": "text",     "id": "cta",      "label": "Bouton",     "default": "S'inscrire"}
+    { "type": "text", "id": "title", "label": "Titre", "default": "Rejoignez la communauté 🇫🇷" },
+    { "type": "text", "id": "subtitle", "label": "Sous-titre", "default": "Offres exclusives, nouveautés — directement dans votre boîte mail." },
+    { "type": "text", "id": "cta", "label": "Texte bouton", "default": "S'inscrire" }
   ],
-  "presets": [{"name": "Newsletter"}]
+  "presets": [{ "name": "Newsletter" }]
 }
 {% endschema %}

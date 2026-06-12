@@ -1,72 +1,51 @@
-<section class="section" style="background:{% if section.settings.bg_dark %}var(--color-primary){% else %}#fff{% endif %};">
-  <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;{% if section.settings.image_position == 'right' %}direction:ltr;{% endif %}">
+<style>
+.editorial { padding: 80px 24px; background: #fff; }
+.editorial-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.editorial-inner.reverse { direction: rtl; }
+.editorial-inner.reverse > * { direction: ltr; }
+.editorial-image { border-radius: 12px; overflow: hidden; aspect-ratio: 4/3; background: #f0f3ff; }
+.editorial-image img { width: 100%; height: 100%; object-fit: cover; }
+.editorial-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 80px; }
+.editorial-eyebrow { display: inline-block; color: var(--color-accent); font-size: 12px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; }
+.editorial-text h2 { color: var(--color-primary); font-size: clamp(24px,3vw,38px); font-weight: 900; text-transform: uppercase; margin-bottom: 20px; line-height: 1.2; }
+.editorial-text p { color: #555; font-size: 16px; line-height: 1.7; margin-bottom: 28px; }
+.editorial-text a { display: inline-block; background: var(--color-primary); color: #fff; padding: 14px 32px; border-radius: 4px; font-weight: 800; font-size: 14px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: background 0.2s; }
+.editorial-text a:hover { background: var(--color-accent); }
+@media (max-width: 768px) { .editorial-inner, .editorial-inner.reverse { grid-template-columns: 1fr; direction: ltr; } }
+</style>
 
-      {%- if section.settings.image_position == 'right' -%}
-        <!-- TEXTE -->
-        <div>
-          {%- if section.settings.eyebrow != blank -%}
-            <p style="font-size:12px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-accent);margin-bottom:14px;">{{ section.settings.eyebrow }}</p>
-          {%- endif -%}
-          <h2 style="color:{% if section.settings.bg_dark %}#fff{% else %}var(--color-primary){% endif %};margin-bottom:18px;">{{ section.settings.heading | default: 'Made in France' }}</h2>
-          <p style="font-size:16px;color:{% if section.settings.bg_dark %}rgba(255,255,255,0.8){% else %}var(--color-muted){% endif %};line-height:1.7;margin-bottom:28px;">{{ section.settings.text | default: 'Chaque produit est conçu et fabriqué en France, avec des matériaux sélectionnés pour leur qualité et leur durabilité.' }}</p>
-          {%- if section.settings.cta_label != blank -%}
-            <a href="{{ section.settings.cta_url | default: '/' }}" class="btn btn--{% if section.settings.bg_dark %}accent{% else %}primary{% endif %}">{{ section.settings.cta_label }}</a>
-          {%- endif -%}
-        </div>
-        <!-- IMAGE -->
-        <div>
-          {%- if section.settings.image != blank -%}
-            <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.heading }}" style="border-radius:8px;width:100%;">
-          {%- else -%}
-            <div style="aspect-ratio:1;background:#f0f3ff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:80px;">🇫🇷</div>
-          {%- endif -%}
-        </div>
+<section class="editorial">
+  <div class="editorial-inner {% if section.settings.image_position == 'right' %}reverse{% endif %}">
+    <div class="editorial-image">
+      {%- if section.settings.image != blank -%}
+        <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.heading | escape }}">
       {%- else -%}
-        <!-- IMAGE -->
-        <div>
-          {%- if section.settings.image != blank -%}
-            <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.heading }}" style="border-radius:8px;width:100%;">
-          {%- else -%}
-            <div style="aspect-ratio:1;background:#f0f3ff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:80px;">🇫🇷</div>
-          {%- endif -%}
-        </div>
-        <!-- TEXTE -->
-        <div>
-          {%- if section.settings.eyebrow != blank -%}
-            <p style="font-size:12px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-accent);margin-bottom:14px;">{{ section.settings.eyebrow }}</p>
-          {%- endif -%}
-          <h2 style="color:{% if section.settings.bg_dark %}#fff{% else %}var(--color-primary){% endif %};margin-bottom:18px;">{{ section.settings.heading | default: 'Made in France' }}</h2>
-          <p style="font-size:16px;color:{% if section.settings.bg_dark %}rgba(255,255,255,0.8){% else %}var(--color-muted){% endif %};line-height:1.7;margin-bottom:28px;">{{ section.settings.text | default: 'Chaque produit est conçu et fabriqué en France, avec des matériaux sélectionnés pour leur qualité et leur durabilité.' }}</p>
-          {%- if section.settings.cta_label != blank -%}
-            <a href="{{ section.settings.cta_url | default: '/' }}" class="btn btn--{% if section.settings.bg_dark %}accent{% else %}primary{% endif %}">{{ section.settings.cta_label }}</a>
-          {%- endif -%}
-        </div>
+        <div class="editorial-placeholder">🇫🇷</div>
       {%- endif -%}
-
+    </div>
+    <div class="editorial-text">
+      {%- if section.settings.eyebrow != blank -%}<span class="editorial-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2>{{ section.settings.heading | default: 'Made in France, fait avec passion.' }}</h2>
+      <p>{{ section.settings.text | default: 'Chaque produit est conçu et fabriqué en France.' }}</p>
+      {%- if section.settings.cta_label != blank -%}
+        <a href="{{ section.settings.cta_url | default: '/pages/a-propos' }}">{{ section.settings.cta_label }}</a>
+      {%- endif -%}
     </div>
   </div>
 </section>
-
-<style>
-@media (max-width: 768px) {
-  .editorial-split-grid { grid-template-columns: 1fr !important; }
-}
-</style>
 
 {% schema %}
 {
   "name": "Éditorial 50/50",
   "settings": [
-    {"type": "text",         "id": "eyebrow",        "label": "Texte eyebrow",     "default": "Notre histoire"},
-    {"type": "textarea",     "id": "heading",        "label": "Titre",             "default": "Made in France, fait avec passion."},
-    {"type": "textarea",     "id": "text",           "label": "Texte",             "default": "Chaque produit est conçu et fabriqué en France, avec des matériaux sélectionnés pour leur qualité."},
-    {"type": "text",         "id": "cta_label",      "label": "Texte bouton",      "default": "En savoir plus"},
-    {"type": "url",          "id": "cta_url",        "label": "Lien bouton"},
-    {"type": "image_picker", "id": "image",          "label": "Image"},
-    {"type": "select",       "id": "image_position", "label": "Position de l'image", "options": [{"value":"left","label":"Gauche"},{"value":"right","label":"Droite"}], "default": "left"},
-    {"type": "checkbox",     "id": "bg_dark",        "label": "Fond bleu",          "default": false}
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "select", "id": "image_position", "label": "Position image", "options": [{"value":"left","label":"Gauche"},{"value":"right","label":"Droite"}], "default": "left" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Notre histoire" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Made in France, fait avec passion." },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "Chaque produit est conçu et fabriqué en France, avec des matériaux sélectionnés pour leur qualité." },
+    { "type": "text", "id": "cta_label", "label": "Bouton", "default": "En savoir plus" },
+    { "type": "url", "id": "cta_url", "label": "Lien" }
   ],
-  "presets": [{"name": "Éditorial 50/50"}]
+  "presets": [{ "name": "Éditorial 50/50" }]
 }
 {% endschema %}

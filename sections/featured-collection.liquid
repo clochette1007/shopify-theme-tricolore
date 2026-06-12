@@ -1,72 +1,80 @@
-{%- assign collection = collections[section.settings.collection] -%}
+<style>
+.featured { padding: 80px 24px; background: #fff; }
+.section-header { text-align: center; margin-bottom: 48px; }
+.section-header h2 { color: var(--color-primary); font-size: clamp(28px,4vw,42px); font-weight: 900; text-transform: uppercase; margin-bottom: 12px; }
+.section-divider { width: 60px; height: 4px; background: var(--color-accent); margin: 0 auto 16px; border-radius: 2px; }
+.section-header p { color: #666; font-size: 16px; }
+.products-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.product-card { border-radius: 10px; overflow: hidden; background: #fff; box-shadow: 0 2px 16px rgba(0,35,149,0.08); transition: transform 0.2s, box-shadow 0.2s; }
+.product-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,35,149,0.15); }
+.product-card__image { aspect-ratio: 1; overflow: hidden; background: #f0f3ff; position: relative; }
+.product-card__image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.product-card:hover .product-card__image img { transform: scale(1.05); }
+.product-badge { position: absolute; top: 10px; left: 10px; background: var(--color-accent); color: #fff; font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; }
+.product-card__info { padding: 16px; }
+.product-card__title { color: var(--color-primary); font-size: 15px; font-weight: 700; margin-bottom: 8px; text-decoration: none; display: block; }
+.product-card__price { color: var(--color-accent); font-size: 18px; font-weight: 800; margin-bottom: 14px; }
+.product-card .btn-add { width: 100%; background: var(--color-primary); color: #fff; border: none; padding: 12px; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; border-radius: 4px; cursor: pointer; transition: background 0.2s; }
+.product-card .btn-add:hover { background: var(--color-accent); }
+.section-cta { text-align: center; margin-top: 48px; }
+.section-cta a { background: var(--color-primary); color: #fff; padding: 16px 40px; border-radius: 4px; font-weight: 800; font-size: 15px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: background 0.2s; }
+.section-cta a:hover { background: var(--color-accent); }
+@media (max-width: 1024px) { .products-grid { grid-template-columns: repeat(3,1fr); } }
+@media (max-width: 768px) { .products-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 480px) { .products-grid { grid-template-columns: 1fr; } }
+</style>
 
-<section class="section" style="background:#fff;">
-  <div class="container">
-    <h2 class="section-title">{{ section.settings.title | default: 'Nos Produits' }}</h2>
-    {%- if section.settings.subtitle != blank -%}
-      <p style="text-align:center;color:var(--color-muted);margin-bottom:40px;">{{ section.settings.subtitle }}</p>
-    {%- endif -%}
-
-    <div class="grid-4">
-      {%- if collection != blank -%}
-        {%- for product in collection.products limit: section.settings.products_count -%}
-          <div class="product-card">
-            <div class="product-card__image">
-              <a href="{{ product.url }}">
-                {%- if product.featured_image -%}
-                  <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy">
-                {%- else -%}
-                  <div style="width:100%;height:100%;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:40px;">📦</div>
-                {%- endif -%}
-              </a>
-            </div>
-            {%- if product.tags contains 'nouveau' or forloop.index <= 2 -%}
-              <span class="product-card__badge">Nouveau</span>
-            {%- endif -%}
-            <div class="product-card__body">
-              <p class="product-card__title"><a href="{{ product.url }}">{{ product.title }}</a></p>
-              <p class="product-card__price">{{ product.price | money }}</p>
-              <form action="/cart/add" method="post">
-                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                <button type="submit" class="btn btn--primary product-card__btn">Ajouter au panier</button>
-              </form>
-            </div>
-          </div>
-        {%- endfor -%}
-      {%- else -%}
-        {%- for i in (1..4) -%}
-          <div class="product-card">
-            <div class="product-card__image"><div style="width:100%;aspect-ratio:1;background:#f0f3ff;display:flex;align-items:center;justify-content:center;font-size:48px;">🇫🇷</div></div>
-            <span class="product-card__badge">Nouveau</span>
-            <div class="product-card__body">
-              <p class="product-card__title">Produit Tricolore {{ i }}</p>
-              <p class="product-card__price">29,99 €</p>
-              <button class="btn btn--primary product-card__btn">Ajouter au panier</button>
-            </div>
-          </div>
-        {%- endfor -%}
-      {%- endif -%}
-    </div>
-
-    {%- if section.settings.cta_label != blank -%}
-      <div style="text-align:center;margin-top:48px;">
-        <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="btn btn--primary">{{ section.settings.cta_label }}</a>
-      </div>
-    {%- endif -%}
+<section class="featured">
+  <div class="section-header">
+    <h2>{{ section.settings.title | default: 'Nos Produits' }}</h2>
+    <div class="section-divider"></div>
+    {%- if section.settings.subtitle != blank -%}<p>{{ section.settings.subtitle }}</p>{%- endif -%}
   </div>
+
+  {%- assign collection = collections[section.settings.collection] | default: collections.all -%}
+  <div class="products-grid">
+    {%- for product in collection.products limit: section.settings.products_count -%}
+      <div class="product-card">
+        <div class="product-card__image">
+          {%- if product.featured_image -%}
+            <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy">
+          {%- else -%}
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:60px;">📦</div>
+          {%- endif -%}
+          <span class="product-badge">Nouveau</span>
+        </div>
+        <div class="product-card__info">
+          <a href="{{ product.url }}" class="product-card__title">{{ product.title }}</a>
+          <div class="product-card__price">{{ product.price | money }}</div>
+          <form action="/cart/add" method="post">
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <button type="submit" class="btn-add">Ajouter au panier</button>
+          </form>
+        </div>
+      </div>
+    {%- else -%}
+      <div style="grid-column:1/-1;text-align:center;padding:60px;color:#aaa;">Aucun produit pour l'instant.</div>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.cta_label != blank -%}
+    <div class="section-cta">
+      <a href="{{ section.settings.cta_url | default: '/collections/all' }}">{{ section.settings.cta_label }}</a>
+    </div>
+  {%- endif -%}
 </section>
 
 {% schema %}
 {
-  "name": "Collection mise en avant",
+  "name": "Collection vedette",
   "settings": [
-    {"type": "text",       "id": "title",          "label": "Titre",                "default": "Nos Produits"},
-    {"type": "text",       "id": "subtitle",       "label": "Sous-titre",            "default": "Sélection made in France"},
-    {"type": "collection", "id": "collection",     "label": "Collection à afficher"},
-    {"type": "range",      "id": "products_count", "label": "Nombre de produits",    "min": 2, "max": 8, "step": 1, "default": 4},
-    {"type": "text",       "id": "cta_label",      "label": "Bouton voir tout",      "default": "Voir toute la boutique"},
-    {"type": "url",        "id": "cta_url",        "label": "Lien bouton"}
+    { "type": "text", "id": "title", "label": "Titre", "default": "Nos Produits" },
+    { "type": "text", "id": "subtitle", "label": "Sous-titre", "default": "Sélection made in France" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_count", "label": "Nombre de produits", "min": 2, "max": 8, "step": 2, "default": 4 },
+    { "type": "text", "id": "cta_label", "label": "Texte du bouton", "default": "Voir toute la boutique" },
+    { "type": "url", "id": "cta_url", "label": "Lien du bouton" }
   ],
-  "presets": [{"name": "Collection mise en avant"}]
+  "presets": [{ "name": "Collection vedette" }]
 }
 {% endschema %}

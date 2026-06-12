@@ -1,21 +1,37 @@
-<section class="section" style="background:#f5f7ff;">
-  <div class="container">
-    <h2 class="section-title">{{ section.settings.title | default: 'Nos Collections' }}</h2>
-    <div class="grid-3" style="margin-top:40px;">
+<style>
+.coll-grid { padding: 80px 24px; background: #f8f9ff; }
+.coll-grid-inner { max-width: 1200px; margin: 0 auto; }
+.coll-grid h2 { text-align: center; color: var(--color-primary); font-size: clamp(26px,4vw,40px); font-weight: 900; text-transform: uppercase; margin-bottom: 12px; }
+.coll-grid-divider { width: 60px; height: 4px; background: var(--color-accent); margin: 0 auto 48px; border-radius: 2px; }
+.coll-grid-tiles { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.coll-tile { position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 3/4; background: var(--color-primary); display: flex; align-items: flex-end; text-decoration: none; }
+.coll-tile-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,35,149,0.8) 0%, rgba(0,35,149,0.2) 60%, transparent 100%); }
+.coll-tile-content { position: relative; z-index: 1; padding: 28px; }
+.coll-tile-title { color: #fff; font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+.coll-tile-btn { display: inline-block; background: var(--color-accent); color: #fff; padding: 8px 20px; border-radius: 3px; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; }
+.coll-tile:hover .coll-tile-btn { background: #fff; color: var(--color-accent); }
+@media (max-width: 768px) { .coll-grid-tiles { grid-template-columns: 1fr; } }
+</style>
+
+<section class="coll-grid">
+  <div class="coll-grid-inner">
+    <h2>{{ section.settings.title | default: 'Nos Collections' }}</h2>
+    <div class="coll-grid-divider"></div>
+    <div class="coll-grid-tiles">
       {%- for block in section.blocks -%}
-        <a href="{{ block.settings.url | default: '/collections/all' }}" style="display:block;position:relative;border-radius:8px;overflow:hidden;aspect-ratio:4/3;text-decoration:none;">
-          {%- if block.settings.image != blank -%}
-            <img src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.title }}" style="width:100%;height:100%;object-fit:cover;">
-          {%- else -%}
-            <div style="width:100%;height:100%;background:var(--color-primary);"></div>
+        {%- assign coll = collections[block.settings.collection] -%}
+        <a href="{% if coll != blank %}{{ coll.url }}{% else %}/collections/all{% endif %}" class="coll-tile" {{ block.shopify_attributes }}>
+          {%- if coll.image -%}
+            <img src="{{ coll.image | image_url: width: 800 }}" alt="{{ block.settings.title | escape }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" loading="lazy">
           {%- endif -%}
-          <!-- OVERLAY -->
-          <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,35,149,0.85) 0%, rgba(0,35,149,0.3) 50%, transparent 100%);"></div>
-          <div style="position:absolute;bottom:24px;left:24px;right:24px;">
-            <h3 style="color:#fff;margin-bottom:10px;">{{ block.settings.title | default: 'Collection' }}</h3>
-            <span style="display:inline-block;background:var(--color-accent);color:#fff;font-size:12px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:6px 16px;border-radius:2px;">Découvrir</span>
+          <div class="coll-tile-overlay"></div>
+          <div class="coll-tile-content">
+            <div class="coll-tile-title">{{ block.settings.title | default: coll.title | default: 'Collection' }}</div>
+            <span class="coll-tile-btn">Découvrir</span>
           </div>
         </a>
+      {%- else -%}
+        <div style="grid-column:1/-1;text-align:center;padding:60px;color:#aaa;">Aucune collection configurée.</div>
       {%- endfor -%}
     </div>
   </div>
@@ -23,28 +39,24 @@
 
 {% schema %}
 {
-  "name": "Grille de collections",
+  "name": "Grille collections",
   "settings": [
-    {"type": "text", "id": "title", "label": "Titre", "default": "Nos Collections"}
+    { "type": "text", "id": "title", "label": "Titre", "default": "Nos Collections" }
   ],
   "blocks": [
     {
       "type": "collection_tile",
       "name": "Tuile collection",
       "settings": [
-        {"type": "text",         "id": "title", "label": "Titre",  "default": "Nouvelle collection"},
-        {"type": "image_picker", "id": "image", "label": "Image"},
-        {"type": "url",          "id": "url",   "label": "Lien"}
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "title", "label": "Titre affiché", "default": "Accessoires" }
       ]
     }
   ],
-  "presets": [{
-    "name": "Grille de collections",
-    "blocks": [
-      {"type": "collection_tile", "settings": {"title": "Accessoires"}},
-      {"type": "collection_tile", "settings": {"title": "Vêtements"}},
-      {"type": "collection_tile", "settings": {"title": "Cadeaux"}}
-    ]
-  }]
+  "presets": [{ "name": "Grille collections", "blocks": [
+    { "type": "collection_tile", "settings": { "title": "Accessoires" } },
+    { "type": "collection_tile", "settings": { "title": "Vêtements" } },
+    { "type": "collection_tile", "settings": { "title": "Cadeaux" } }
+  ]}]
 }
 {% endschema %}
