@@ -1,0 +1,63 @@
+<section style="background:#fff;padding:60px 0;min-height:60vh;">
+  <div class="container">
+    <h1 style="color:var(--color-primary);margin-bottom:40px;">Mon panier</h1>
+    {%- if cart.item_count == 0 -%}
+      <div style="text-align:center;padding:80px 20px;">
+        <div style="font-size:60px;margin-bottom:20px;">🛒</div>
+        <h2 style="color:var(--color-primary);margin-bottom:12px;">Votre panier est vide</h2>
+        <p style="color:#888;margin-bottom:30px;">Découvrez nos produits made in France.</p>
+        <a href="/collections/all" class="btn btn--primary">Continuer les achats</a>
+      </div>
+    {%- else -%}
+      <div style="display:grid;grid-template-columns:1fr 360px;gap:40px;">
+        <div>
+          {%- for item in cart.items -%}
+            <div style="display:flex;gap:20px;padding:20px 0;border-bottom:1px solid #eee;align-items:center;">
+              <img src="{{ item.image | image_url: width: 120 }}" alt="{{ item.title | escape }}" style="width:100px;height:100px;object-fit:cover;border-radius:6px;">
+              <div style="flex:1;">
+                <h3 style="color:var(--color-primary);font-size:16px;margin-bottom:6px;">{{ item.product.title }}</h3>
+                {%- unless item.variant.title == 'Default Title' -%}
+                  <p style="color:#888;font-size:13px;margin-bottom:8px;">{{ item.variant.title }}</p>
+                {%- endunless -%}
+                <div style="font-size:18px;font-weight:700;color:var(--color-accent);">{{ item.line_price | money }}</div>
+              </div>
+              <form action="/cart/change" method="post" style="display:flex;align-items:center;gap:8px;">
+                <input type="hidden" name="id" value="{{ item.key }}">
+                <input type="number" name="quantity" value="{{ item.quantity }}" min="0" style="width:60px;padding:6px;text-align:center;">
+                <button type="submit" class="btn btn--primary" style="padding:8px 14px;font-size:13px;">Maj</button>
+              </form>
+            </div>
+          {%- endfor -%}
+        </div>
+        <div style="background:#f8f9ff;border-radius:12px;padding:28px;height:fit-content;">
+          <h3 style="color:var(--color-primary);margin-bottom:20px;">Récapitulatif</h3>
+          <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
+            <span>Sous-total</span><strong>{{ cart.total_price | money }}</strong>
+          </div>
+          {%- if cart.total_price < 4000 -%}
+            <div style="background:#e8f0ff;border-radius:6px;padding:12px;margin-bottom:16px;font-size:13px;color:var(--color-primary);">
+              🇫🇷 Plus que {{ 4000 | minus: cart.total_price | money }} pour la livraison offerte !
+            </div>
+          {%- else -%}
+            <div style="background:#e8ffe8;border-radius:6px;padding:12px;margin-bottom:16px;font-size:13px;color:#2a7a2a;">
+              ✅ Livraison offerte !
+            </div>
+          {%- endif -%}
+          <a href="/checkout" class="btn btn--primary" style="display:block;text-align:center;width:100%;font-size:16px;padding:16px;">Passer la commande</a>
+          <a href="/collections/all" style="display:block;text-align:center;margin-top:14px;color:var(--color-primary);font-size:14px;">← Continuer les achats</a>
+          <div style="display:flex;gap:12px;justify-content:center;margin-top:20px;flex-wrap:wrap;">
+            <span style="font-size:12px;color:#aaa;">💳 CB &nbsp; Visa &nbsp; Mastercard &nbsp; PayPal</span>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Panier principal",
+  "settings": [],
+  "presets": [{"name": "Panier principal"}]
+}
+{% endschema %}

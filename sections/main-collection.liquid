@@ -1,0 +1,78 @@
+<section style="background:#fff;padding:60px 0;">
+  <div class="container">
+    <!-- Bannière collection -->
+    <div style="background:var(--color-primary);border-radius:12px;padding:48px 40px;margin-bottom:48px;text-align:center;">
+      <h1 style="color:#fff;font-size:clamp(28px,5vw,48px);margin-bottom:12px;">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <p style="color:rgba(255,255,255,0.8);font-size:16px;max-width:600px;margin:0 auto;">{{ collection.description }}</p>
+      {%- endif -%}
+    </div>
+
+    <!-- Filtres -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;flex-wrap:wrap;gap:12px;">
+      <p style="color:#888;font-size:14px;">{{ collection.products_count }} produit{{ collection.products_count | pluralize: '', 's' }}</p>
+      <select onchange="location=this.value" style="padding:10px 16px;border:2px solid var(--color-primary);border-radius:6px;color:var(--color-primary);font-weight:600;">
+        <option value="?sort_by=manual">Trier par</option>
+        <option value="?sort_by=price-ascending" {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>Prix croissant</option>
+        <option value="?sort_by=price-descending" {% if collection.sort_by == 'price-descending' %}selected{% endif %}>Prix décroissant</option>
+        <option value="?sort_by=best-selling" {% if collection.sort_by == 'best-selling' %}selected{% endif %}>Meilleures ventes</option>
+        <option value="?sort_by=created-descending" {% if collection.sort_by == 'created-descending' %}selected{% endif %}>Nouveautés</option>
+      </select>
+    </div>
+
+    <!-- Grille produits -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:28px;">
+      {%- for product in collection.products -%}
+        <div class="product-card">
+          <a href="{{ product.url }}" style="text-decoration:none;">
+            <div style="position:relative;aspect-ratio:1;overflow:hidden;border-radius:10px;background:#f0f3ff;">
+              {%- if product.featured_image -%}
+                <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" style="width:100%;height:100%;object-fit:cover;transition:transform 0.3s;" class="product-img">
+              {%- else -%}
+                <div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:60px;">📦</div>
+              {%- endif -%}
+              {%- if product.available == false -%}
+                <span style="position:absolute;top:10px;left:10px;background:#aaa;color:#fff;font-size:11px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:2px;">Épuisé</span>
+              {%- elsif product.created_at > 'now' | date: '%s' | minus: 2592000 -%}
+                <span style="position:absolute;top:10px;left:10px;background:var(--color-accent);color:#fff;font-size:11px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:2px;">Nouveau</span>
+              {%- endif -%}
+            </div>
+            <div style="padding:14px 4px 4px;">
+              <h3 style="color:var(--color-primary);font-size:15px;margin-bottom:6px;">{{ product.title }}</h3>
+              <div style="font-size:18px;font-weight:800;color:var(--color-accent);">{{ product.price | money }}</div>
+            </div>
+          </a>
+          <form action="/cart/add" method="post" style="margin-top:10px;">
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <button type="submit" class="btn btn--primary" style="width:100%;padding:12px;font-size:14px;">Ajouter au panier</button>
+          </form>
+        </div>
+      {%- else -%}
+        <div style="grid-column:1/-1;text-align:center;padding:60px;color:#888;">
+          <div style="font-size:60px;margin-bottom:16px;">🔍</div>
+          <h3>Aucun produit dans cette collection.</h3>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <!-- Pagination -->
+    {%- if paginate.pages > 1 -%}
+      <div style="display:flex;justify-content:center;gap:8px;margin-top:48px;">
+        {%- if paginate.previous -%}
+          <a href="{{ paginate.previous.url }}" class="btn btn--outline">← Précédent</a>
+        {%- endif -%}
+        {%- if paginate.next -%}
+          <a href="{{ paginate.next.url }}" class="btn btn--primary">Suivant →</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection principale",
+  "settings": [],
+  "presets": [{"name": "Collection principale"}]
+}
+{% endschema %}
