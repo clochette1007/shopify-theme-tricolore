@@ -122,7 +122,7 @@
     <div>
       <span class="product-buy__badge">★ Bestseller</span>
       <h2 class="product-buy__title">Décapsuleur Catapulte Crafter</h2>
-      <div class="product-buy__price">17,99 €</div>
+      <div class="product-buy__price">14,99 €</div>
       <div class="product-buy__desc">
         <p><strong>Lance ta capsule, célèbre le but.</strong></p>
         <p>Le décapsuleur Crafter propulse ta capsule jusqu'à 5 mètres d'une simple pression. Conçu pour les soirées foot, les apéros entre amis et ceux qui ouvrent leur bière avec style.</p>
@@ -157,7 +157,7 @@ function ajouterAuPanier() {
   fetch('/cart/add.js', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id: 54048264520017, quantity: 1 })
+    body: JSON.stringify({ id: 54055447527761, quantity: 1 })
   })
   .then(function(r) { return r.json(); })
   .then(function() {
@@ -173,7 +173,7 @@ function ajouterAuPanier() {
     });
   })
   .catch(function() {
-    window.location.href = '/cart/add?id=54048264520017&quantity=1';
+    window.location.href = '/cart/add?id=54055447527761&quantity=1';
   });
 }
 </script>
