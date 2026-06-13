@@ -1,7 +1,7 @@
 <style>
 .hero {
   background: var(--color-primary);
-  padding: 80px 24px 60px;
+  padding: 100px 24px 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,7 +39,7 @@
   text-transform: uppercase;
   line-height: 1.1;
   text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   position: relative;
   z-index: 2;
 }
@@ -49,50 +49,12 @@
 }
 .hero-sub {
   color: rgba(255,255,255,0.8);
-  font-size: 18px;
+  font-size: clamp(15px, 2vw, 19px);
   text-align: center;
-  margin-bottom: 60px;
+  max-width: 520px;
+  line-height: 1.6;
   position: relative;
   z-index: 2;
-}
-.hero-bottom {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 1000px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 60px;
-}
-.hero-photo {
-  flex: 0 0 auto;
-  width: clamp(240px, 32vw, 420px);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
-}
-.hero-photo img { width: 100%; height: auto; display: block; }
-.hero-slogan {
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.hero-slogan-line {
-  font-size: clamp(38px, 5.5vw, 76px);
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  line-height: 1;
-  color: #fff;
-  white-space: nowrap;
-}
-.hero-slogan-line.red { color: var(--color-accent); }
-.hero-slogan-line.with-icon::after { content: ' 🍺'; font-size: 0.6em; }
-@media (max-width: 768px) {
-  .hero-bottom { flex-direction: column; gap: 32px; }
-  .hero-slogan { align-items: center; }
 }
 </style>
 
@@ -100,16 +62,6 @@
   <div class="hero-eyebrow">🇫🇷 Nouvelle collection 2026</div>
   <h1 class="hero-title">Imprimé en 3D pour <em>trinquer</em> aux Français.</h1>
   <p class="hero-sub">Des décapsuleurs conçus pour ceux qui aiment partager un bon verre.</p>
-  <div class="hero-bottom">
-    <div class="hero-photo">
-      <img src="https://cdn.shopify.com/s/files/1/1054/2147/2081/files/photo.png?v=1781266719" alt="Décapsuleur Crafter">
-    </div>
-    <div class="hero-slogan">
-      <div class="hero-slogan-line">PRÊTS</div>
-      <div class="hero-slogan-line red">MARQUEZ</div>
-      <div class="hero-slogan-line with-icon">DECAPSULEZ&thinsp;!</div>
-    </div>
-  </div>
 </section>
 
 {% schema %}
